@@ -13,9 +13,21 @@ class Post extends Model
 
     protected $fillable = [
         'title',
+        'category',
         'body',
         'image'
     ];
+
+    public static function getCategories() 
+    {
+        return [
+            'shonen' => 'Shonen',
+            'shojo' => 'Shojo',
+            'seinen' => 'Seinen',
+            'josei' => 'Josei',
+            'kodomomuke' => 'Kodomomuke'
+        ];
+    }
 
     public function user() : BelongsTo
     {

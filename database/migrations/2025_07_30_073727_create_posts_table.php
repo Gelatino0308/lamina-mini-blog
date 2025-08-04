@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
+            $table->enum('category', ['shonen', 'shojo', 'seinen', 'josei', 'kodomomuke']);
             $table->text('body');
             $table->string('image')->nullable();
             $table->timestamps();

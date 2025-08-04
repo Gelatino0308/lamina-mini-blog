@@ -45,6 +45,7 @@ class PostController extends Controller implements HasMiddleware
         // Validate
         $request->validate([
             'title' => ['required', 'max:255'],
+            'category' => ['required', 'in:shonen,shojo,seinen,josei,kodomomuke'],
             'body' => ['required'],
             'image' => ['nullable', 'file', 'max:3000', 'mimes:webp,png,jpg'] 
         ]);
@@ -96,6 +97,7 @@ class PostController extends Controller implements HasMiddleware
         // Validate
         $request->validate([
             'title' => ['required', 'max:255'],
+            'category' => ['required', 'in:shonen,shojo,seinen,josei,kodomomuke'],
             'body' => ['required'],
             'image' => ['nullable', 'file', 'max:3000', 'mimes:webp,png,jpg']  
         ]);

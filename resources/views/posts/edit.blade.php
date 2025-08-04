@@ -18,6 +18,22 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
             </div>
+
+            {{-- Post Category --}}
+            <div class="mb-4">
+                <label for="category">Post Category</label>
+                <select name="category" id="category" class="input @error('category') ring-red-500 @enderror">
+                    <option value="">Select the anime category</option>
+                    @foreach (\App\Models\Post::getCategories() as $value => $label)
+                        <option value="{{ $value }}" {{ $post->category == $value ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('category')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+            </div>
     
             {{-- Post Body --}}
             <div class="mb-4">

@@ -59,6 +59,7 @@ class PostController extends Controller implements HasMiddleware
         // Create a post
         Auth::user()->posts()->create([
             'title' => $request->title,
+            'category' => $request->category,
             'body' => $request->body,
             'image' => $path
         ]);
@@ -114,6 +115,7 @@ class PostController extends Controller implements HasMiddleware
         // Update a post
         $post->update([
             'title' => $request->title,
+            'category' => $request->category,
             'body' => $request->body,
             'image' => $path
         ]);

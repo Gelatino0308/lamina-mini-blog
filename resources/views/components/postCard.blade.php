@@ -1,5 +1,16 @@
 @props(['post', 'full' => false])
 
+@php
+    $categoryColors = [
+        'shonen' => 'bg-red-600',
+        'shojo' => 'bg-pink-600', 
+        'seinen' => 'bg-gray-700',
+        'josei' => 'bg-purple-600',
+        'kodomomuke' => 'bg-yellow-500'
+    ];
+    $bgColor = $categoryColors[$post->category] ?? 'bg-blue-800';
+@endphp
+
 <div class="card">
     {{-- Cover photo --}}
     <div class="h-52 rounded-md mb-4 w-full object-cover overflow-hidden">
@@ -13,10 +24,14 @@
     {{-- Title --}}
     <h2 class="font-bold text-xl">{{ $post->title }}</h2>
 
-    {{-- Author and Date --}}
-    <div class="text-xs font-light mb-4">
-        <span>Posted {{ $post->created_at->diffForHumans() }} by</span>
-        <a href="{{ route('posts.user', $post->user) }}" class="text-blue-500 font-medium">{{ $post->user->username }}</a>
+    <div class="flex justify-between text-xs mb-4">
+        {{-- Author and Date --}}
+        <div class="text-sm font-light">
+            <span>Posted {{ $post->created_at->diffForHumans() }} by</span>
+            <a href="{{ route('posts.user', $post->user) }}" class="text-blue-500 font-medium">{{ $post->user->username }}</a>
+        </div>
+        {{-- Category --}}
+        <span class="text-xs font-bold text-white {{ $bgColor }} px-3 py-1 rounded-xl">{{ $post->category }}</span>
     </div>
 
     {{-- Body --}}

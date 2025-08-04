@@ -72,20 +72,27 @@
     {{-- User Posts --}}
     <h2 class="font-bold mb-4">Your Latest Posts</h2>
 
-    <div class="grid grid-cols-2 gap-6">
-        @foreach ($posts as $post)
-            <x-postCard :post="$post">
-                {{-- Update post --}}
-                <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Update</a>
-
-                {{-- Delete post --}}
-                <form action="{{ route('posts.destroy', $post) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
-                </form>
-            </x-postCard>
-        @endforeach
+    <div x-data="{ selectedCategory: 'all' }">
+        {{-- Filter dropdown --}}
+        <x-categoryFilter :categories="\App\Models\Post::getCategories()" />
+        
+        {{-- User's posts --}}
+        <div class="grid grid-cols-2 gap-6">
+            @foreach ($posts as $post)
+                <div x-show="selectedCategory === 'all' || selectedCategory === '{{ $post->category }}'">
+                    <x-postCard :post="$post">
+                        {{-- Update post --}}
+                        <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Update</a>
+                        {{-- Delete post --}}
+                        <form action="{{ route('posts.destroy', $post) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
+                        </form>
+                    </x-postCard>
+                </div>
+            @endforeach
+        </div>
     </div>
 
     <div>

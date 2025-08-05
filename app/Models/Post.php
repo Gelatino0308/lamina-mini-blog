@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Post extends Model
 {
@@ -15,7 +16,8 @@ class Post extends Model
         'title',
         'category',
         'body',
-        'image'
+        'image',
+        'likes'
     ];
 
     public static function getCategories() 
@@ -32,5 +34,19 @@ class Post extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function likedByUsers() : BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'post_user_likes')->withTimestamps();
+    }
+
+    public function isLikedBy($user) : bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $this->likedByUsers()->where('user_id', $user->id)->exists();
     }
 }

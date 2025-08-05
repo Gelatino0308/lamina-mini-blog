@@ -21,7 +21,8 @@ class PostFactory extends Factory
             'user_id' => 1,
             'title' => fake()->sentence(),
             'category' => fake()->randomElement(array_keys(Post::getCategories())),
-            'body' => fake()->paragraph(20)
+            'body' => fake()->paragraph(20),
+            'likes' => fake()->numberBetween(0, 50)
         ];
     }
 }

@@ -143,4 +143,29 @@ class PostController extends Controller implements HasMiddleware
         // Redirect back to dashboard
         return back()->with('delete', 'Your post was deleted!');
     }
+
+    /**
+     * Toggle like for a post (authenticated users only)
+     */
+    public function toggleLike(Post $post)
+    {
+        $user = Auth::user();
+        
+        if ($post->isLikedBy($user)) {
+            // Unlike: remove from post user likes table and decrease likes count
+            $user->likedPosts()->detach($post->id);
+            $post->decrement('likes');
+            $isLiked = false;
+        } else {
+            // Like: add to post user likes table and increase likes count
+            $user->likedPosts()->attach($post->id);
+            $post->increment('likes');
+            $isLiked = true;
+        }
+        
+        return response()->json([
+            'likes' => $post->fresh()->likes,
+            'isLiked' => $isLiked
+        ]);
+    }
 }

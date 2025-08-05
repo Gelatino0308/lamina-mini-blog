@@ -22,7 +22,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(),
             'category' => fake()->randomElement(array_keys(Post::getCategories())),
             'body' => fake()->paragraph(20),
-            'likes' => fake()->numberBetween(0, 50)
+            'likes' => fake()->numberBetween(0, 50),
         ];
     }
 }

@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/posts/{post}/toggle-like', [PostController::class, 'toggleLike'])->name('posts.toggle-like');
     
+    Route::post('/posts/{post}/store-comment', [PostController::class, 'storeComments'])->name('posts.store-comment');
 });
 
 Route::middleware('guest')->group(function () {

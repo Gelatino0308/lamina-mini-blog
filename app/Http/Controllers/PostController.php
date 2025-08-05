@@ -73,6 +73,8 @@ class PostController extends Controller implements HasMiddleware
      */
     public function show(Post $post)
     {
+        $post->load('comments.user');
+
         return view('posts.show', ['post' => $post]);
     }
 
@@ -144,9 +146,9 @@ class PostController extends Controller implements HasMiddleware
         return back()->with('delete', 'Your post was deleted!');
     }
 
-    /**
-     * Toggle like for a post (authenticated users only)
-     */
+    
+    // Toggle like for a post (authenticated users only)
+     
     public function toggleLike(Post $post)
     {
         $user = Auth::user();
@@ -167,5 +169,23 @@ class PostController extends Controller implements HasMiddleware
             'likes' => $post->fresh()->likes,
             'isLiked' => $isLiked
         ]);
+    }
+
+    // Store a newly created comment in db
+    public function storeComments(Request $request, Post $post)
+    {
+        // Validate
+        $request->validate([
+            'comment' => ['required', 'string', 'max:1500']
+        ]);
+
+        // Create a comment
+        $post->comments()->create([
+            'user_id' => Auth::id(),
+            'comment' => $request->comment
+        ]);
+
+        // Redirect to dashboard
+        return back()->with('success', 'Your comment was created');
     }
 }

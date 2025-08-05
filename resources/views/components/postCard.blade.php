@@ -55,52 +55,18 @@
                 
                 {{-- Like Button --}}
                 <div 
-                    x-data="{ 
-                        likes: {{ $post->likes }}, 
-                        isLiked: {{ $isLiked ? 'true' : 'false' }},
-                        isLoading: false,
-                        isAuthenticated: {{ Auth::check() ? 'true' : 'false' }},
-                        async toggleLike() {
-                            if (!this.isAuthenticated) {
-                                alert('Please login to like posts');
-                                return;
-                            }
-                            
-                            if (this.isLoading) return;
-                            this.isLoading = true;
-                            
-                            try {
-                                const response = await fetch('{{ route('posts.toggle-like', $post) }}', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                    }
-                                });
-                                
-                                if (response.status === 401) {
-                                    alert('Please login to like posts');
-                                    return;
-                                }
-                                
-                                const data = await response.json();
-                                this.likes = data.likes;
-                                this.isLiked = data.isLiked;
-                            } catch (error) {
-                                console.error('Error toggling like:', error);
-                                alert('Something went wrong. Please try again.');
-                            } finally {
-                                this.isLoading = false;
-                            }
-                        }
-                    }" 
+                    x-data="likeButton({{ $post->likes }}, 
+                        {{ $isLiked ? 'true' : 'false' }}, 
+                        {{ Auth::check() ? 'true' : 'false' }}, 
+                        '{{ route('posts.toggle-like', $post) }}', 
+                        '{{ csrf_token() }}')"
                     class="text-lg select-none flex items-center gap-1"
                     :class="isAuthenticated ? 'cursor-pointer' : 'cursor-not-allowed'"
                     @click="toggleLike()"
                 >
                     <span 
-                        class="transition-colors duration-200"
                         :class="isLiked ? 'text-yellow-500' : 'text-gray-400'"
+                        class="transition-colors duration-200"
                         :style="isLoading ? 'opacity: 0.5' : ''"
                     >
                         ★
@@ -119,3 +85,48 @@
         {{ $slot }}
     </div>
 </div>
+
+{{-- Moved Alpine js object to script --}}
+<script>
+    function likeButton(initialLikes, initialIsLiked, isAuthenticated, toggleUrl, csrfToken) {
+        return {
+            likes: initialLikes,
+            isLiked: initialIsLiked,
+            isLoading: false,
+            isAuthenticated: isAuthenticated,
+            async toggleLike() {
+                if (!this.isAuthenticated) {
+                    alert('Please login to like posts');
+                    return;
+                }
+                
+                if (this.isLoading) return;
+                this.isLoading = true;
+                
+                try {
+                    const response = await fetch(toggleUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    });
+                    
+                    if (response.status === 401) {
+                        alert('Please login to like posts');
+                        return;
+                    }
+                    
+                    const data = await response.json();
+                    this.likes = data.likes;
+                    this.isLiked = data.isLiked;
+                } catch (error) {
+                    console.error('Error toggling like:', error);
+                    alert('Something went wrong. Please try again.');
+                } finally {
+                    this.isLoading = false;
+                }
+            }
+        }
+    }
+</script>

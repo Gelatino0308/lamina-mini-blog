@@ -9,14 +9,14 @@ Route::redirect('/', 'posts');
 
 Route::resource('posts', PostController::class);
 
-Route::post('/posts/{post}/toggle-like', [PostController::class, 'toggleLike'])->name('posts.toggle-like')->middleware('auth');
-
 Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::post('/posts/{post}/toggle-like', [PostController::class, 'toggleLike'])->name('posts.toggle-like');
 });
 
 Route::middleware('guest')->group(function () {

@@ -55,7 +55,8 @@ class PostFactory extends Factory
             'title' => fake()->randomElement(array_merge($animeTitles, $mangaTitles)),
             'category' => fake()->randomElement(array_keys(Post::getCategories())),
             'body' => fake()->randomElement(array_merge($animeArticleBodies, $mangaArticleBodies)),
-            'likes' => fake()->numberBetween(0, 50),
+            'image' => 'posts_images/default.jpg',
+            'likes' => fake()->numberBetween(0, 50)
         ];
     }
 }

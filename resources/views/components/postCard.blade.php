@@ -30,24 +30,24 @@
                 {{-- Author and Date --}}
                 <div class="text-sm font-light">
                     <span>Posted {{ $post->created_at->diffForHumans() }} by</span>
-                    <a href="{{ route('posts.user', $post->user) }}" class="text-blue-500 font-medium">{{ $post->user->username }}</a>
+                    <a href="{{ route('posts.user', $post->user) }}" class="text-black font-medium">{{ $post->user->username }}</a>
                 </div>
                 {{-- Category --}}
-                <span class="text-xs font-bold text-white {{ $categoryColors[$post->category] ?? 'bg-blue-800' }} px-3 py-1 rounded-xl">{{ $post->category }}</span>
+                <span class="text-xs font-bold text-white shadow-sm shadow-orange-900 {{ $categoryColors[$post->category] ?? 'bg-blue-800' }} px-3 py-1 rounded-xl">{{ $post->category }}</span>
             </div>
 
             {{-- Body --}}
-            @if ($full)
-                <div class="text-sm">
-                    <span>{{ $post->body }}</span>
-                </div>
-            @else
-                <span class="block">{{ Str::words($post->body, 15) }}</span>
-            @endif
+            <p class="text-justify">
+                @if ($full)
+                    {{ $post->body }}
+                @else
+                    {{ Str::words($post->body, 15) }}
+                @endif
+            </p>
             
             <div class="flex justify-between mt-2">
                 @if (!$full) 
-                    <a href="{{ route('posts.show', $post) }}" class="text-blue-500 mr-3">Read more &rarr;</a>
+                    <a href="{{ route('posts.show', $post) }}" class="text-black mr-3">Read more &rarr;</a>
                 @endif
                 
                 {{-- Like Button --}}
@@ -62,7 +62,7 @@
                     @click="toggleLike()"
                 >
                     <span 
-                        :class="isLiked ? 'text-yellow-500' : 'text-gray-400'"
+                        :class="isLiked ? 'text-white' : 'text-orange-800'"
                         class="transition-colors duration-200"
                         :style="isLoading ? 'opacity: 0.5' : ''"
                     >
@@ -77,10 +77,13 @@
         </div>
     </div>
 
-    {{-- Placeholder for extra elements used in user dashboard --}}
-    <div class="flex items-center justify-end gap-4 mt-6">
-        {{ $slot }}
-    </div>
+    @if(request()->routeIs('dashboard'))
+        {{-- Placeholder for extra elements used in user dashboard --}}
+        <div class="flex items-center justify-end gap-4 mt-6">
+            {{ $slot }}
+        </div>
+    @endif
+    
 </div>
 
 {{-- Moved Alpine js object to script --}}

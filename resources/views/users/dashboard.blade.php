@@ -55,7 +55,7 @@
 
             {{-- Post Image --}}
             <div class="mb-4">
-                <label for="image">Cover photo</label>
+                <label for="image">Upload Cover Photo: </label>
                 <input type="file" name="image" id="image">
 
                 @error('image')
@@ -69,7 +69,7 @@
     </div>
 
     {{-- User Posts --}}
-    <h2 class="font-bold mb-4">Your Latest Posts</h2>
+    <h2 class="font-bold text-xl my-4">Your Latest Posts</h2>
 
     {{-- Filter dropdown --}}
     <x-categoryFilter 
@@ -82,17 +82,20 @@
         @forelse ($posts as $post)
             <x-postCard :post="$post">
                 {{-- Update post --}}
-                <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Update</a>
+                <a href="{{ route('posts.edit', $post) }}" 
+                    class="bg-green-500 text-white px-2 py-1 rounded-md shadow-md hover:bg-green-700">
+                    Update
+                </a>
                 {{-- Delete post --}}
                 <form action="{{ route('posts.destroy', $post) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
+                    <button class="bg-red-500 text-white px-2 py-1 rounded-md shadow-md hover:bg-red-700">Delete</button>
                 </form>
             </x-postCard>
         @empty
             <div class="col-span-2 text-center py-8">
-                <p class="text-gray-500 text-lg">No posts found for the selected genre.</p>
+                <p class="text-gray-300 text-lg">No posts found for the selected genre.</p>
             </div>
         @endforelse
     </div>

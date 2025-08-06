@@ -8,9 +8,6 @@
         'josei' => 'bg-purple-600',
         'kodomomuke' => 'bg-yellow-500'
     ];
-    $bgColor = $categoryColors[$post->category] ?? 'bg-blue-800';
-    
-    $isLiked = Auth::check() ? $post->isLikedBy(Auth::user()) : false;
 @endphp
 
 <div class="card h-full">
@@ -36,7 +33,7 @@
                     <a href="{{ route('posts.user', $post->user) }}" class="text-blue-500 font-medium">{{ $post->user->username }}</a>
                 </div>
                 {{-- Category --}}
-                <span class="text-xs font-bold text-white {{ $bgColor }} px-3 py-1 rounded-xl">{{ $post->category }}</span>
+                <span class="text-xs font-bold text-white {{ $categoryColors[$post->category] ?? 'bg-blue-800' }} px-3 py-1 rounded-xl">{{ $post->category }}</span>
             </div>
 
             {{-- Body --}}
@@ -56,8 +53,8 @@
                 {{-- Like Button --}}
                 <div 
                     x-data="likeButton({{ $post->likes }}, 
-                        {{ $isLiked ? 'true' : 'false' }}, 
-                        {{ Auth::check() ? 'true' : 'false' }}, 
+                        @json(Auth::check() ? $post->isLikedBy(Auth::user()) : false), 
+                        @json(Auth::check()), 
                         '{{ route('posts.toggle-like', $post) }}', 
                         '{{ csrf_token() }}')"
                     class="text-lg select-none flex items-center gap-1"

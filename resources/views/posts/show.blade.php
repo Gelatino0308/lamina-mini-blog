@@ -1,9 +1,12 @@
 <x-layout>
 
+    {{-- Detailed post --}}
     <x-postCard :post="$post" full/>
 
+    {{-- Comment section --}}
     <div class="card">
         @auth
+            {{-- Comment form --}}
             <form action="{{ route('posts.store-comment', $post) }}" method="post">
                 @csrf
                 

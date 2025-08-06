@@ -10,20 +10,44 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
 
-    public function index() {
+    public function index(Request $request) 
+    {
+        $query = Auth::user()->posts()->latest();
+        
+        // Filter by category if provided
+        if ($request->filled('category') && $request->category !== 'all') {
+            $query->where('category', $request->category);
+        }
+        
+        $posts = $query->paginate(6);
+        
+        // Append query parameters to pagination links
+        $posts->appends($request->query());
 
-        $posts = Auth::user()->posts()->latest()->paginate(6);
-
-        return view('users.dashboard', ['posts' => $posts]);
+        return view('users.dashboard', [
+            'posts' => $posts,
+            'selectedCategory' => $request->get('category', 'all')
+        ]);
     }
 
-    public function userPosts(User $user) {
+    public function userPosts(User $user, Request $request) 
+    {
+        $query = $user->posts()->latest();
         
-        $userPosts =$user->posts()->latest()->paginate(6);
+        // Filter by category if provided
+        if ($request->filled('category') && $request->category !== 'all') {
+            $query->where('category', $request->category);
+        }
+        
+        $userPosts = $query->paginate(6);
+        
+        // Append query parameters to pagination links
+        $userPosts->appends($request->query());
 
         return view('users.posts', [
             'posts' => $userPosts,
-            'user' => $user
+            'user' => $user,
+            'selectedCategory' => $request->get('category', 'all')
         ]);
     }
 }

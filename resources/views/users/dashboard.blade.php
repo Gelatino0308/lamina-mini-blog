@@ -33,7 +33,7 @@
                 <select name="category" id="category" class="input @error('category') ring-red-500 @enderror">
                     <option value="">Select the anime category</option>
                     @foreach (\App\Models\Post::getCategories() as $value => $label)
-                        <option value="{{ $value }}" {{ old('category' == $value ? 'selected' : '' ) }}>
+                        <option value="{{ $value }}" {{ old('category') == $value ? 'selected' : '' }}>
                             {{ $label }}
                         </option>
                     @endforeach
@@ -71,30 +71,33 @@
     {{-- User Posts --}}
     <h2 class="font-bold mb-4">Your Latest Posts</h2>
 
-    <div x-data="{ selectedCategory: 'all' }">
-        {{-- Filter dropdown --}}
-        <x-categoryFilter :categories="\App\Models\Post::getCategories()" />
-        
-        {{-- User's posts --}}
-        <div class="grid grid-cols-2 gap-6">
-            @foreach ($posts as $post)
-                <div x-show="selectedCategory === 'all' || selectedCategory === '{{ $post->category }}'">
-                    <x-postCard :post="$post">
-                        {{-- Update post --}}
-                        <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Update</a>
-                        {{-- Delete post --}}
-                        <form action="{{ route('posts.destroy', $post) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
-                        </form>
-                    </x-postCard>
-                </div>
-            @endforeach
-        </div>
+    {{-- Filter dropdown --}}
+    <x-categoryFilter 
+        :categories="\App\Models\Post::getCategories()" 
+        :selected="$selectedCategory" 
+    />
+    
+    {{-- User's posts --}}
+    <div class="grid grid-cols-2 gap-6">
+        @forelse ($posts as $post)
+            <x-postCard :post="$post">
+                {{-- Update post --}}
+                <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Update</a>
+                {{-- Delete post --}}
+                <form action="{{ route('posts.destroy', $post) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
+                </form>
+            </x-postCard>
+        @empty
+            <div class="col-span-2 text-center py-8">
+                <p class="text-gray-500">No posts found for the selected category.</p>
+            </div>
+        @endforelse
     </div>
 
-    <div>
+    <div class="mt-8">
         {{ $posts->links() }}
     </div>
 </x-layout>

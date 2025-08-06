@@ -22,11 +22,24 @@ class PostController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::latest()->paginate(6);
+        $query = Post::latest();
         
-        return view('posts.index', [ 'posts' => $posts ]);
+        // Filter by category if provided
+        if ($request->filled('category') && $request->category !== 'all') {
+            $query->where('category', $request->category);
+        }
+        
+        $posts = $query->paginate(6);
+        
+        // Append query parameters to pagination links
+        $posts->appends($request->query());
+        
+        return view('posts.index', [
+            'posts' => $posts,
+            'selectedCategory' => $request->get('category', 'all')
+        ]);
     }
 
     /**

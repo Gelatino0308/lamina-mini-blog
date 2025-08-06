@@ -2,22 +2,25 @@
     
     <h1 class="title">Latest Posts</h1>
 
-    <div x-data="{ selectedCategory: 'all' }">
-        {{-- Filter dropdown --}}
-        <x-categoryFilter :categories="\App\Models\Post::getCategories()" />
-        
-        {{-- List of posts --}}
-        <div class="grid grid-cols-2 gap-6">
-            @foreach ($posts as $post)
-                <div x-show="selectedCategory === 'all' || selectedCategory === '{{ $post->category }}'">
-                    <x-postCard :post="$post" />
-                </div>
-            @endforeach
-        </div>
+    {{-- Filter dropdown --}}
+    <x-categoryFilter 
+        :categories="\App\Models\Post::getCategories()" 
+        :selected="$selectedCategory" 
+    />
+    
+    {{-- List of posts --}}
+    <div class="grid grid-cols-2 gap-6">
+        @forelse ($posts as $post)
+            <x-postCard :post="$post" />
+        @empty
+            <div class="col-span-2 text-center py-8">
+                <p class="text-gray-500">No posts found for the selected genre.</p>
+            </div>
+        @endforelse
     </div>
 
     {{-- Pagination links --}}
-    <div>
+    <div class="mt-8">
         {{ $posts->links() }}
     </div>
 

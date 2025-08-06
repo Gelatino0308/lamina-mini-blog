@@ -12,7 +12,13 @@ class DashboardController extends Controller
 
     public function index(Request $request) 
     {
-        $query = Auth::user()->posts()->latest();
+        $user = Auth::user();
+
+        // Get total posts count (unfiltered)
+        $totalPosts = $user->posts()->count();
+
+        // Build filtered query
+        $query = $user->posts()->latest();
         
         // Filter by category if provided
         if ($request->filled('category') && $request->category !== 'all') {
@@ -26,6 +32,7 @@ class DashboardController extends Controller
 
         return view('users.dashboard', [
             'posts' => $posts,
+            'totalPosts' => $totalPosts,
             'selectedCategory' => $request->get('category', 'all')
         ]);
     }

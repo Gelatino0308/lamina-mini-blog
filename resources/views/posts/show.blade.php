@@ -52,7 +52,7 @@
                     <p class="text-gray-800">{{ $comment->comment }}</p>
                 </div>
             @empty
-                <p class="text-gray-500 text-center py-8">No comments yet. Be the first to comment!</p>
+                <p class="text-gray-500 text-center py-8 text-lg">No comments yet. Be the first to comment!</p>
             @endforelse
         </div>
     </div>

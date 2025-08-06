@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="title">{{ $user->username }}'s Posts &#9830; {{ $posts->total() }}</h1>
+    <h1 class="title">{{ $user->username }}'s Posts &#9830; {{ $posts->total() }} {{ \App\Models\Post::getCategories()[$selectedCategory] ?? 'Total' }} Post</h1>
 
     {{-- Filter dropdown --}}
     <x-categoryFilter 
@@ -13,7 +13,7 @@
             <x-postCard :post="$post" />
         @empty
             <div class="col-span-2 text-center py-8">
-                <p class="text-gray-500">No posts found for the selected category.</p>
+                <p class="text-gray-500 text-lg">No posts found for the selected genre.</p>
             </div>
         @endforelse
     </div>

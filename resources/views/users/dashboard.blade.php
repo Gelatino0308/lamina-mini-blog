@@ -1,6 +1,6 @@
 <x-layout>
     
-    <h1 class="title">Welcome {{ auth()->user()->username }}, you have {{ $posts->total() }} posts</h1>
+    <h1 class="title">Welcome {{ auth()->user()->username }}, you have {{ $totalPosts }} posts</h1>
 
     {{-- Create Post Form --}}
     <div class="card mb-4">
@@ -92,7 +92,7 @@
             </x-postCard>
         @empty
             <div class="col-span-2 text-center py-8">
-                <p class="text-gray-500">No posts found for the selected category.</p>
+                <p class="text-gray-500 text-lg">No posts found for the selected genre.</p>
             </div>
         @endforelse
     </div>

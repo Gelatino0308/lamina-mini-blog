@@ -28,7 +28,7 @@
         @apply text-sm text-slate-600;
     }
     .card {
-        @apply bg-white p-6 rounded-lg shadow-lg border border-slate-200;
+        @apply bg-[#ff640a] p-6 rounded-lg shadow-lg shadow-orange-800;
     }
     .username {
         @apply py-2 pl-4 border-b border-slate-200 text-xs text-slate-700;

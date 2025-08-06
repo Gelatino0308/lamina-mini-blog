@@ -7,20 +7,24 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-slate-100 text-slate-900">
-    <header class="bg-slate-800 shadow-lg">
-        <nav>
+<body class="text-white bg-gradient-to-r from from-black to-orange-500">
+    <header class="bg-black shadow-lg">
+        <nav class="h-20 w-full">
             <a href="{{ route('posts.index') }}" class="nav-link">Home</a>
+
+            <img src="{{ asset('storage/images/WeebYaps-logo.png') }}" 
+                alt="WeebYaps Logo"
+                class="h-full object-cover object-center">
 
             @auth
                 <div class="relative grid place-items-center" x-data="{ open: false }">
                     {{-- Dropdown menu button --}}
                     <button @click="open = !open" type="button" class="round-btn">
-                        <img src="https://picsum.photos/200" alt="">
+                        <img src="{{ asset('storage\images\user.png') }}" alt="">
                     </button>
 
                     {{-- Dropdown menu --}}
-                    <div x-show="open" @click.outside="open = false" class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light">
+                    <div x-show="open" @click.outside="open = false" class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light z-10">
                         <p class="username">{{ auth()->user()->username }}</p>
                         <a href="{{ route('dashboard') }}" class="block hover:bg-slate-100 pl-4 pr-8 py-2 mb-1">Dashboard</a>
 
@@ -42,7 +46,25 @@
         </nav>
     </header>
 
-    <main class="py-8 px-4 mx-auto max-w-screen-lg">
+    <main class="py-8 px-4 mx-auto max-w-screen-lg relative">
+        @if(request()->routeIs('posts.index'))
+            {{-- Hero Banner Section --}}
+            <section class="relative w-full h-32 md:h-60 overflow-hidden rounded-xl mb-8 shadow-xl">
+                <img src="{{ asset('storage/images/anime-bg.jpg') }}" 
+                    alt="WeebYaps Banner" 
+                    class="w-full h-full object-cover object-center">
+                
+                <div class="absolute inset-0 bg-black/50"></div>
+                
+                <div class="absolute inset-0 flex items-center justify-start pl-10">
+                    <div class="text-white">
+                        <h1 class="text-2xl md:text-4xl font-bold drop-shadow-lg">Welcome to WeebYaps</h1>
+                        <p class="text-sm md:text-xl drop-shadow-md">Your anime discussion hub</p>
+                    </div>
+                </div>
+            </section>
+        @endif
+
         {{ $slot }}
     </main>
 </body>

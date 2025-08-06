@@ -17,7 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Post::factory(2)->create(); 
-        Comment::factory(3)->create();
+        Post::factory(4)->create(); 
+        Post::all()->each(function ($post) {
+            Comment::factory(3)->create([
+                'post_id' => $post->id,
+                'user_id' => User::inRandomOrder()->first()->id
+            ]);
+        });
     }
 }

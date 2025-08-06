@@ -69,8 +69,10 @@
                 
                 <div class="absolute inset-0 flex items-center justify-start pl-10">
                     <div class="text-white">
-                        <h1 class="text-2xl md:text-4xl font-bold drop-shadow-lg">Welcome to WeebYaps</h1>
-                        <p class="text-sm md:text-xl drop-shadow-md">Your anime discussion hub</p>
+                        <h1 class="text-2xl md:text-4xl font-bold drop-shadow-lg">
+                            Welcome to <span class="text-orange-300">WeebYaps</span>
+                        </h1>
+                        <p class="text-sm md:text-xl drop-shadow-md">Your anime and manga discussion hub</p>
                     </div>
                 </div>
             </section>

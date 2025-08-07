@@ -3,7 +3,7 @@
     <h1 class="title">Welcome {{ auth()->user()->username }}, you have {{ $totalPosts }} posts</h1>
 
     {{-- Create Post Form --}}
-    <div class="card mb-4">
+    <div class="card mb-4 bg-orange-300 text-orange-800">
         <h2 class="font-bold mb-4">Create a new post</h2>
 
         {{-- Session Messages --}}

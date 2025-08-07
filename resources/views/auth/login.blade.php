@@ -1,7 +1,7 @@
 <x-layout>
     <h1 class="title">Welcome back</h1>
 
-    <div class="mx-auto max-w-screen-sm card">
+    <div class="mx-auto max-w-screen-sm card bg-orange-300">
         <form action="{{ route('login') }}" method="post">
             @csrf
 

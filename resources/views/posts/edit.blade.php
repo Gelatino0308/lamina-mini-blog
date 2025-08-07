@@ -2,7 +2,7 @@
 
     <a href="{{ route('dashboard') }}" class="block mb-4 text-xs text-white">&larr; Go back to your dashboard</a>
 
-    <div class="card">
+    <div class="card bg-orange-300 text-orange-800">
         <h2 class="font-bold mb-4">Update your post</h2>
 
         <form action="{{ route('posts.update', $post) }}" method="post" enctype="multipart/form-data">

@@ -4,7 +4,7 @@
     <x-postCard :post="$post" full/>
 
     {{-- Comment section --}}
-    <div class="card mt-5">
+    <div class="card mt-5 bg-orange-300 text-orange-800">
         @auth
             {{-- Comment form --}}
             <form action="{{ route('posts.store-comment', $post) }}" method="post">
@@ -32,7 +32,7 @@
 
         @else
             <p class="text-gray-700 mb-4">
-                <a href="{{ route('login') }}" class="text-white">Login</a> to leave a comment.
+                <a href="{{ route('login') }}" class="text-orange-700">Login</a> to leave a comment.
             </p>
         @endauth
         
@@ -42,17 +42,17 @@
         {{-- Post's comments --}}
         <div class="space-y-4">
             @forelse ($post->comments as $comment)
-                <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-orange-900">
+                <div class="bg-orange-400 p-4 rounded-lg border-l-4 border-orange-900">
                     <div class="flex justify-between items-start mb-2">
                         <div class="flex items-center gap-2">
-                            <span class="font-semibold text-orange-900">{{ $comment->user->username }}</span>
-                            <span class="text-xs text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+                            <span class="font-semibold">{{ $comment->user->username }}</span>
+                            <span class="text-xs text-orange-100">{{ $comment->created_at->diffForHumans() }}</span>
                         </div>
                     </div>
-                    <p class="text-gray-800">{{ $comment->comment }}</p>
+                    <p class="text-black">{{ $comment->comment }}</p>
                 </div>
             @empty
-                <p class="text-gray-300 text-center py-8 text-lg">No comments yet. Be the first to comment!</p>
+                <p class="text-[#ff640a] text-center py-8 text-lg">No comments yet. Be the first to comment!</p>
             @endforelse
         </div>
     </div>

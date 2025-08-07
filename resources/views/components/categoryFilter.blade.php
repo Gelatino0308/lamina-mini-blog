@@ -9,7 +9,7 @@
         <label for="category" class="text-lg text-white">Filter by Genre:</label>
         <select name="category" 
                 id="category" 
-                class="input p-1 w-fit inline text-center" 
+                class="input px-4 py-1 w-fit inline text-center" 
                 onchange="document.getElementById('category-filter-form').submit()"
         >
             <option value="all" {{ $selected === 'all' ? 'selected' : '' }}>All Posts</option>

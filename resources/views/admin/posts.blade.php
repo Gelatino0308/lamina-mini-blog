@@ -1,0 +1,75 @@
+<x-admin-layout title="Posts">
+    {{-- Page Header --}}
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Posts</h2>
+        <a href="{{ route('admin.posts.create') }}" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
+            Create New Post
+        </a>
+    </div>
+
+    {{-- Posts Table --}}
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cover Image</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Post Title</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Created</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @forelse($posts as $post)
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $post->id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="w-16 h-12 rounded overflow-hidden">
+                                    @if($post->image)
+                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Post cover" class="w-full h-full object-cover">
+                                    @else
+                                        <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                    @endif
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm font-medium text-gray-900 max-w-xs truncate">{{ $post->title }}</div>
+                                <div class="text-sm text-gray-500">by {{ $post->user->username }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div data-category-dropdown data-post-id="{{ $post->id }}" data-current-category="{{ $post->category }}"></div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $post->created_at->format('M d, Y') }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex items-center gap-2">
+                                    <a href="{{ route('admin.posts.show', $post) }}" class="bg-blue-500 text-white px-3 py-1 text-sm rounded hover:bg-blue-600 transition-colors">
+                                        View
+                                    </a>
+                                    <a href="{{ route('admin.posts.edit', $post) }}" class="bg-green-500 text-white px-3 py-1 text-sm rounded hover:bg-green-600 transition-colors">
+                                        Edit
+                                    </a>
+                                    <div data-admin-modal data-modal-type="delete-post" data-item-id="{{ $post->id }}"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="px-6 py-4 text-center text-gray-500">No posts found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {{-- Pagination --}}
+    <div class="mt-6">
+        {{ $posts->links() }}
+    </div>
+</x-admin-layout>

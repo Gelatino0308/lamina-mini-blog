@@ -28,7 +28,6 @@ class AuthController extends Controller
     }
 
     // Login User
-
     public function login(Request $request) {
         // Validate
         $fields = $request->validate([
@@ -38,11 +37,18 @@ class AuthController extends Controller
 
         // Try to login the user
         if (Auth::attempt($fields, $request->remember)) {
+            $user = Auth::user();
+            
+            // Redirect based on role
+            if ($user->isAdmin()) {
+                return redirect()->intended('admin/dashboard');
+            }
+            
             return redirect()->intended('dashboard');
         }
         else {
             return back()->withErrors([
-                'failed' => 'The provided credentials do not much our records.'
+                'failed' => 'The provided credentials do not match our records.'
             ]);
         }
     }

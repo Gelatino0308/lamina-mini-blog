@@ -28,8 +28,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Delete routes
     Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('users.destroy');
-    Route::delete('/posts/{post}', [AdminController::class, 'deletePost'])->name('posts.destroy');
     Route::delete('/comments/{comment}', [AdminController::class, 'deleteComment'])->name('comments.destroy');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 });
 
 // Public and user routes

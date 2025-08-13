@@ -91,15 +91,6 @@ class AdminController extends Controller
         return back()->with('success', 'User deleted successfully');
     }
 
-    public function deletePost(Post $post)
-    {
-        if ($post->image && $post->image !== 'posts_images/default.jpg') {
-            Storage::disk('public')->delete($post->image);
-        }
-        $post->delete();
-        return back()->with('success', 'Post deleted successfully');
-    }
-
     public function deleteComment(Comment $comment)
     {
         $comment->delete();

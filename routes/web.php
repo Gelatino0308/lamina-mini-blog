@@ -16,7 +16,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/comments', [AdminController::class, 'comments'])->name('comments');
 
     // Admin post management routes
-    Route::get('/posts/create', [AdminController::class, 'createPost'])->name('posts.create');
+    Route::view('/posts/create', 'admin.create-post')->name('posts.create');
     Route::get('/posts/{post}', [AdminController::class, 'showPost'])->name('posts.show');
     Route::get('/posts/{post}/edit', [AdminController::class, 'editPost'])->name('posts.edit');
     Route::post('/posts/store', [PostController::class, 'store'])->name('posts.store');

@@ -13,27 +13,6 @@
                 <x-postCard :post="$post" full />
             </div>
 
-            {{-- Comments Section --}}
-            @if($post->comments->count() > 0)
-                <div class="p-6 border-t">
-                    <h3 class="text-lg font-semibold mb-4">Comments ({{ $post->comments->count() }})</h3>
-                    <div class="space-y-4">
-                        @foreach($post->comments as $comment)
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-medium">{{ $comment->user->username }}</span>
-                                        <span class="text-sm text-gray-500">{{ $comment->created_at->format('M d, Y g:i A') }}</span>
-                                    </div>
-                                    <div data-admin-modal data-modal-type="delete-comment" data-item-id="{{ $comment->id }}"></div>
-                                </div>
-                                <p class="text-gray-700">{{ $comment->comment }}</p>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
-
             {{-- Post's comments --}}
             <div class="space-y-4">
                 @forelse ($post->comments as $comment)

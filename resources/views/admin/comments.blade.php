@@ -1,9 +1,6 @@
 <x-admin-layout title="Comments">
     {{-- Page Header --}}
-    <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-900">Comments</h2>
-        <span class="text-sm text-gray-600">Total: {{ $comments->total() }} comments</span>
-    </div>
+    <h2 class="text-2xl mb-6 font-bold text-gray-900">Total: {{ $comments->total() }} comment/s</h2>
 
     {{-- Comments Table --}}
     <div class="bg-white rounded-lg shadow overflow-hidden">

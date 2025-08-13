@@ -18,7 +18,7 @@
             @if ($post->image)
                 <img src="{{ asset('storage/' . $post->image) }}" alt="">
             @else
-                <img class="object-cover object-center rounded-md" src="{{ asset('storage/posts_images/default.jpg') }}" alt="">
+                <img class="object-cover object-center rounded-md" src="{{ asset('storage/posts_images/default.png') }}" alt="">
             @endif
         </div>
 
@@ -30,7 +30,11 @@
                 {{-- Author and Date --}}
                 <div class="text-sm font-light">
                     <span>Posted {{ $post->created_at->diffForHumans() }} by</span>
-                    <a href="{{ route('posts.user', $post->user) }}" class="text-black font-medium">{{ $post->user->username }}</a>
+                    @if (Auth::check() && Auth::user()->role != 'admin')    
+                        <a href="{{ route('posts.user', $post->user) }}" class="text-black font-medium">{{ $post->user->username }}</a>
+                    @else
+                        <span class="text-black font-medium">{{ $post->user->username }}</span>
+                    @endif
                 </div>
                 {{-- Category --}}
                 <span class="text-xs font-bold text-white shadow-sm shadow-orange-900 {{ $categoryColors[$post->category] ?? 'bg-blue-800' }} px-3 py-1 rounded-xl">{{ $post->category }}</span>

@@ -1,9 +1,6 @@
 <x-admin-layout title="Users">
     {{-- Page Header --}}
-    <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-900">Users</h2>
-        <span class="text-sm text-gray-600">Total: {{ $users->total() }} users</span>
-    </div>
+    <h2 class="text-2xl mb-6 font-bold text-gray-900">Total: {{ $users->total() }} user/s</h2>
 
     {{-- Users Table --}}
     <div class="bg-white rounded-lg shadow overflow-hidden">

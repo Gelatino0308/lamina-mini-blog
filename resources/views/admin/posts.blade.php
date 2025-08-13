@@ -1,7 +1,7 @@
 <x-admin-layout title="Posts">
     {{-- Page Header --}}
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-900">Posts</h2>
+        <h2 class="text-2xl font-bold text-gray-900">Total: {{ $posts->total() }} post/s</h2>
         <a href="{{ route('admin.posts.create') }}" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
             Create New Post
         </a>

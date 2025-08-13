@@ -121,7 +121,7 @@ class PostController extends Controller implements HasMiddleware
         // Store image if exists
         $path = $post->image ?? null;
         if ($request->hasFile('image')) {
-            if ($post->image && $post->image != 'posts_images/default.jpg') {
+            if ($post->image && $post->image != 'posts_images/default.png') {
                 Storage::disk('public')->delete($post->image);
             }
             $path = Storage::disk('public')->put('posts_images', $request->image);

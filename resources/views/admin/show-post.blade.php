@@ -1,11 +1,6 @@
 <x-admin-layout title="View Post">
     <div class="max-w-4xl">
-        <div class="flex items-center gap-4 mb-6">
-            <a href="{{ route('admin.posts') }}" class="text-blue-600 hover:text-blue-800">
-                ← Back to Posts
-            </a>
-            <h2 class="text-2xl font-bold text-gray-900">View Post</h2>
-        </div>
+        <a href="{{ route('admin.posts') }}" class="block mb-6 text-blue-600 hover:text-blue-800"> ← Back to Posts </a>
 
         <div class="bg-white rounded-lg shadow">
             {{-- Post Content --}}

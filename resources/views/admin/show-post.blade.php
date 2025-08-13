@@ -9,7 +9,7 @@
 
         <div class="bg-white rounded-lg shadow">
             {{-- Post Content --}}
-            <div class="p-6">
+            <div class="p-6 text-white">
                 <x-postCard :post="$post" full />
             </div>
 

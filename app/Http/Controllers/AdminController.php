@@ -110,7 +110,7 @@ class AdminController extends Controller
     public function deleteUser(User $user)
     {
         $user->delete();
-        return back()->with('success', 'User deleted successfully');
+        return back()->with('delete', 'The user was deleted!');
     }
 
     /**
@@ -119,6 +119,6 @@ class AdminController extends Controller
     public function deleteComment(Comment $comment)
     {
         $comment->delete();
-        return back()->with('success', 'Comment deleted successfully');
+        return back()->with('delete', 'The comment was deleted!');
     }
 }

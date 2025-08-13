@@ -11,7 +11,7 @@ import AdminModal from './components/AdminModal';
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize sidebar if element exists
     const sidebarElement = document.getElementById('admin-sidebar');
-    console.log('Sidebar element:', sidebarElement);
+    
     if (sidebarElement) {
         const root = createRoot(sidebarElement);
         root.render(<AdminSidebar />);

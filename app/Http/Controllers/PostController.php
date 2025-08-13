@@ -164,7 +164,6 @@ class PostController extends Controller implements HasMiddleware
 
     
     // Toggle like for a post (authenticated users only)
-     
     public function toggleLike(Post $post)
     {
         $user = Auth::user();

@@ -1,28 +1,15 @@
 <x-admin-layout title="View Post">
-    <div class="max-w-4xl">
+    <div class="flex flex-col items-center">
         <a href="{{ url()->previous() }}" class="block mb-6 text-blue-600 hover:text-blue-800"> ← Back to Previous Page </a>
 
-        <div class="bg-white rounded-lg shadow">
+        <div class="bg-white rounded-lg shadow max-w-4xl">
             {{-- Post Content --}}
             <div class="p-6 text-white">
                 <x-postCard :post="$post" full />
             </div>
 
-            {{-- Post's comments --}}
-            <div class="space-y-4">
-                @forelse ($post->comments as $comment)
-                    <div class="bg-orange-400 p-4 rounded-lg border-l-4 border-orange-900">
-                        <div class="flex justify-between items-start mb-2">
-                            <div class="flex items-center gap-2">
-                                <span class="font-semibold">{{ $comment->user->username }}</span>
-                                <span class="text-xs text-orange-100">{{ $comment->created_at->diffForHumans() }}</span>
-                            </div>
-                        </div>
-                        <p class="text-black">{{ $comment->comment }}</p>
-                    </div>
-                @empty
-                    <p class="text-[#ff640a] text-center py-8 text-lg">No comments yet. Be the first to comment!</p>
-                @endforelse
+            <div class="p-6">
+                <x-comment-section :post="$post"/>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 <x-admin-layout title="Edit Post">
     <div class="flex flex-col items-center">
-        <a href="{{ route('admin.posts') }}" class="block mb-6 text-blue-600 hover:text-blue-800"> ← Back to Posts </a>
+        <a href="{{ route('admin.posts') }}" class="block mb-6 text-white hover:text-orange-500"> ← Back to Posts </a>
 
-        <div class="bg-white rounded-lg shadow p-6 max-w-4xl w-full">
+        <div class="bg-orange-100 rounded-lg shadow p-6 max-w-4xl w-full">
             {{-- Current Image Display --}}
             @if ($post->image)
                 <div class="mb-6">

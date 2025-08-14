@@ -21,14 +21,21 @@
         {{-- Sidebar --}}
         <div class="h-screen w-64 bg-black text-white flex flex-col">
             {{-- Header --}}
-            <div class="p-6 border-slate-700">
-                <h1 class="text-xl font-bold text-orange-300">WeebYaps</h1>
-                <p class="text-sm text-slate-300">Admin Dashboard</p>
+            <div class="p-6 flex justify-between">
+                <div>
+                    <h1 class="text-xl font-bold text-orange-300">WeebYaps</h1>
+                    <p class="text-sm text-slate-300">Admin Dashboard</p>
+                </div>
+                <div class="flex justify-center">
+                    <img src="{{ asset('storage/images/WeebYaps-logo.png') }}" 
+                        alt="WeebYaps Logo"
+                        class="h-12 object-contain">
+                </div>
             </div>
 
             {{-- Navigation --}}
             <nav class="flex-1 p-4">
-                <ul class="space-y-2">
+                <ul class="space-y-2 flex flex-col gap-4">
                     @foreach($navItems as $item)
                         <li>
                             <a

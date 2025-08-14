@@ -54,7 +54,7 @@
     </div>
 
     {{-- Pagination --}}
-    <div class="mt-6">
+    <div>
         {{ $users->links() }}
     </div>
 </x-admin-layout>

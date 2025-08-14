@@ -1,6 +1,6 @@
 <x-admin-layout title="View Post">
     <div class="max-w-4xl">
-        <a href="{{ route('admin.posts') }}" class="block mb-6 text-blue-600 hover:text-blue-800"> ← Back to Posts </a>
+        <a href="{{ url()->previous() }}" class="block mb-6 text-blue-600 hover:text-blue-800"> ← Back to Previous Page </a>
 
         <div class="bg-white rounded-lg shadow">
             {{-- Post Content --}}

@@ -22,8 +22,8 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $comment->id }}</td>
                             <td class="px-6 py-4">
                                 <div class="max-w-xs">
-                                    <p class="text-sm text-gray-900 truncate">{{ Str::limit($comment->comment, 100) }}</p>
-                                    @if(strlen($comment->comment) > 100)
+                                    <p class="text-sm text-gray-900 truncate">{{ Str::limit($comment->comment, 1500) }}</p>
+                                    @if(strlen($comment->comment) > 50)
                                         <button 
                                             onclick="this.previousElementSibling.classList.toggle('truncate'); this.textContent = this.textContent === 'Show more' ? 'Show less' : 'Show more'"
                                             class="text-xs text-blue-600 hover:text-blue-800 mt-1"
@@ -46,8 +46,8 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="max-w-xs">
-                                    <a href="{{ route('posts.show', $comment->post) }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 truncate block">
-                                        {{ Str::limit($comment->post->title, 50) }}
+                                    <a href="{{ route('admin.posts.show', $comment->post) }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 truncate block">
+                                        {{ Str::limit($comment->post->title, 35) }}
                                     </a>
                                     <div class="text-sm text-gray-500">by {{ $comment->post->user->username }}</div>
                                 </div>
@@ -68,7 +68,7 @@
     </div>
 
     {{-- Pagination --}}
-    <div class="mt-6">
+    <div>
         {{ $comments->links() }}
     </div>
 </x-admin-layout>

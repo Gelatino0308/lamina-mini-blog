@@ -1,9 +1,19 @@
 <x-admin-layout title="Dashboard">
     {{-- Welcome Banner --}}
-    <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg p-6 mb-8 text-white">
-        <h2 class="text-2xl font-bold mb-2">Welcome to Admin Dashboard</h2>
-        <p class="text-orange-100">Manage your WeebYaps platform from here</p>
-    </div>
+    <section class="relative w-full h-32 md:h-50 overflow-hidden rounded-xl mb-8 shadow-lg">
+        <img src="{{ asset('storage/images/WeebYaps-banner.png') }}" 
+            alt="WeebYaps Banner" 
+            class="w-full h-full object-cover object-center">
+        
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white">
+                <h1 class="text-2xl font-bold mb-2">
+                    Welcome to Admin Dashboard
+                </h1>
+                <p class="text-md text-center">Manage your WeebYaps platform from here</p>
+            </div>
+        </div>
+    </section>
 
     {{-- Stats Cards --}}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

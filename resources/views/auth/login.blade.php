@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Login">
     <h1 class="title">Welcome back</h1>
 
     <div class="mx-auto max-w-screen-sm card bg-orange-300">

@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Post Details">
 
     {{-- Detailed post --}}
     <x-postCard :post="$post" full/>

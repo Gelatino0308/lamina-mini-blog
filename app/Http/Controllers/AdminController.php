@@ -19,6 +19,7 @@ class AdminController extends Controller
         $stats = [
             'users' => User::count(),
             'posts' => Post::count(),
+            'likes' => Post::sum('likes'),
             'comments' => Comment::count(),
         ];
 

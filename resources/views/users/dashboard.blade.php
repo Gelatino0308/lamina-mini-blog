@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Dashboard">
     
     <h1 class="title">Welcome {{ auth()->user()->username }}, you have {{ $totalPosts }} posts</h1>
 

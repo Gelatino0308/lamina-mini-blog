@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ $title ?? 'Blogger Dashboard' }} - {{ env('APP_NAME') }}</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -28,7 +28,9 @@
                     <div class="relative" x-data="{ open: false }">
                         {{-- Dropdown menu button --}}
                         <button @click="open = !open" type="button" class="round-btn">
-                            <img src="{{ asset('storage/images/user.png') }}" alt="">
+                            <div class="w-9 h-9 bg-orange-300 rounded-full flex items-center justify-center text-sm font-medium text-black">
+                                {{ strtoupper(substr(auth()->user()->username, 0, 2)) }}
+                            </div>
                         </button>
 
                         {{-- Dropdown menu --}}

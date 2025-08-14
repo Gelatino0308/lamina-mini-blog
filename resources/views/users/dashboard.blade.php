@@ -29,9 +29,9 @@
 
             {{-- Post Category --}}
             <div class="mb-4">
-                <label for="category">Post Category</label>
+                <label for="category">Post Genre</label>
                 <select name="category" id="category" class="input @error('category') ring-red-500 @enderror">
-                    <option value="">Select the anime category</option>
+                    <option value="">Select the anime/manga genre</option>
                     @foreach (\App\Models\Post::getCategories() as $value => $label)
                         <option value="{{ $value }}" {{ old('category') == $value ? 'selected' : '' }}>
                             {{ $label }}

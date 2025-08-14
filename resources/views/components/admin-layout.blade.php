@@ -19,9 +19,9 @@
     @endphp
     <div class="flex h-screen">
         {{-- Sidebar --}}
-        <div class="h-screen w-64 bg-slate-800 text-white flex flex-col">
+        <div class="h-screen w-64 bg-black text-white flex flex-col">
             {{-- Header --}}
-            <div class="p-6 border-b border-slate-700">
+            <div class="p-6 border-slate-700">
                 <h1 class="text-xl font-bold text-orange-300">WeebYaps</h1>
                 <p class="text-sm text-slate-300">Admin Dashboard</p>
             </div>
@@ -36,7 +36,7 @@
                                 class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors 
                                 {{ request()->is(ltrim($item['path'], '/')) ? 
                                     'bg-orange-600 text-white' : 
-                                    'text-slate-300 hover:bg-slate-700 hover:text-white' }}"
+                                    'text-slate-300 hover:bg-gray-500 hover:text-white' }}"
                             >
                                 <span class="text-lg">{{ $item['icon'] }}</span>
                                 {{ $item['label'] }}
@@ -50,7 +50,7 @@
             <div class="p-4 border-t border-slate-700">
                 <form action="{{ route('logout') }}" method="post" class="w-full">
                     @csrf
-                    <button class="w-full flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">
+                    <button class="w-full flex items-center gap-3 px-4 py-3 text-slate-300 bg-gray-700 hover:bg-orange-600 hover:text-white rounded-lg transition-colors">
                         <span class="text-lg">🚪</span>
                         Logout
                     </button>
@@ -61,18 +61,18 @@
         {{-- Main Content --}}
         <div class="flex-1 flex flex-col overflow-hidden">
             {{-- Top Bar --}}
-            <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-2xl font-semibold text-gray-800">{{ $title ?? 'Dashboard' }}</h1>
+            <header class="bg-black shadow-sm border-b border-white px-6 py-4">
+                <div class="flex items-center justify-between text-white">
+                    <h1 class="text-2xl font-semibold">{{ $title ?? 'Dashboard' }}</h1>
                     <div class="flex items-center gap-4">
-                        <span class="text-sm text-gray-600">Welcome, {{ auth()->user()->username }}</span>
+                        <span class="text-sm">Welcome, {{ auth()->user()->username }}</span>
                         <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">Admin</span>
                     </div>
                 </div>
             </header>
             
             {{-- Content Area --}}
-            <main class="flex-1 overflow-y-auto p-6">
+            <main class="flex-1 overflow-y-auto p-6 bg-gradient-to-b from-black to-[#ff640a]">
                 {{-- Flash Messages --}}
                 @if (session('success'))
                     <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">

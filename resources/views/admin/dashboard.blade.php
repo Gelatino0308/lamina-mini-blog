@@ -17,7 +17,7 @@
 
     {{-- Stats Cards --}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-orange-200 rounded-lg shadow p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-blue-100 text-blue-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-orange-200 rounded-lg shadow p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-green-100 text-green-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-orange-200 rounded-lg shadow p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-red-100 text-red-600">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="bg-orange-200 rounded-lg shadow p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -75,7 +75,7 @@
     </div>
 
     {{-- Posts per Category Chart --}}
-    <div class="bg-white rounded-lg shadow p-6">
+    <div class="bg-orange-200 rounded-lg shadow p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Posts per Genre</h3>
         
         @if(count($postsPerCategory) > 0)

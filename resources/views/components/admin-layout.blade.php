@@ -9,9 +9,54 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin/app.jsx'])
 </head>
 <body class="bg-gray-100">
+    @php
+        $navItems = [
+            ['path' => '/admin/dashboard', 'label' => 'Dashboard', 'icon' => '📊'],
+            ['path' => '/admin/users', 'label' => 'Users', 'icon' => '👥'],
+            ['path' => '/admin/posts', 'label' => 'Posts', 'icon' => '📝'],
+            ['path' => '/admin/comments', 'label' => 'Comments', 'icon' => '💬']
+        ];
+    @endphp
     <div class="flex h-screen">
         {{-- Sidebar --}}
-        <div id="admin-sidebar"></div>
+        <div class="h-screen w-64 bg-slate-800 text-white flex flex-col">
+            {{-- Header --}}
+            <div class="p-6 border-b border-slate-700">
+                <h1 class="text-xl font-bold text-orange-300">WeebYaps</h1>
+                <p class="text-sm text-slate-300">Admin Dashboard</p>
+            </div>
+
+            {{-- Navigation --}}
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    @foreach($navItems as $item)
+                        <li>
+                            <a
+                                href="{{ $item['path'] }}"
+                                class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors 
+                                {{ request()->is(ltrim($item['path'], '/')) ? 
+                                    'bg-orange-600 text-white' : 
+                                    'text-slate-300 hover:bg-slate-700 hover:text-white' }}"
+                            >
+                                <span class="text-lg">{{ $item['icon'] }}</span>
+                                {{ $item['label'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </nav>
+
+            {{-- Logout --}}
+            <div class="p-4 border-t border-slate-700">
+                <form action="{{ route('logout') }}" method="post" class="w-full">
+                    @csrf
+                    <button class="w-full flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">
+                        <span class="text-lg">🚪</span>
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
         
         {{-- Main Content --}}
         <div class="flex-1 flex flex-col overflow-hidden">

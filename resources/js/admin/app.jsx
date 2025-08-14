@@ -2,21 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 // Admin Components
-import AdminSidebar from './components/AdminSidebar';
 import UserRoleDropdown from './components/UserRoleDropdown';
 import CategoryDropdown from './components/CategoryDropdown';
 import AdminModal from './components/AdminModal';
 
 // Initialize React components when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize sidebar if element exists
-    const sidebarElement = document.getElementById('admin-sidebar');
-    
-    if (sidebarElement) {
-        const root = createRoot(sidebarElement);
-        root.render(<AdminSidebar />);
-    }
-
     // Initialize user role dropdowns
     document.querySelectorAll('[data-user-role-dropdown]').forEach(element => {
         const userId = element.getAttribute('data-user-id');

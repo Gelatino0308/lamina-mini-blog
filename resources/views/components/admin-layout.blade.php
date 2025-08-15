@@ -55,13 +55,7 @@
 
             {{-- Logout --}}
             <div class="p-4 border-t border-slate-700">
-                <form action="{{ route('logout') }}" method="post" class="w-full">
-                    @csrf
-                    <button class="w-full flex items-center gap-3 px-4 py-3 text-slate-300 bg-gray-700 hover:bg-orange-600 hover:text-white rounded-lg transition-colors">
-                        <span class="text-lg">🚪</span>
-                        Logout
-                    </button>
-                </form>
+                <div data-admin-modal data-modal-type="logout"></div>
             </div>
         </div>
         

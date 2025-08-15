@@ -59,7 +59,11 @@
         </nav>
     </header>
 
-    <main class="py-8 px-4 mx-auto max-w-screen-lg relative w-full flex-1 flex flex-col justify-center">
+    <main class="py-8 px-4 mx-auto max-w-screen-lg relative w-full flex flex-col justify-center 
+        @if(request()->routeIs('login') || request()->routeIs('register')) 
+            flex-1 
+        @endif"
+    >
         @if(request()->routeIs('posts.index'))
             {{-- Hero Banner Section --}}
             <section class="relative w-full h-32 md:h-60 overflow-hidden rounded-xl mb-8 shadow-xl">

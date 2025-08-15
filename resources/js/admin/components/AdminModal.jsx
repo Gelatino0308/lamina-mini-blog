@@ -13,7 +13,8 @@ const AdminModal = ({ type, itemId }) => {
                     description: 'Are you sure you want to delete this user? This action cannot be undone.',
                     actionText: 'Delete User',
                     actionClass: 'bg-red-600 hover:bg-red-700',
-                    endpoint: `/admin/users/${itemId}`
+                    endpoint: `/admin/users/${itemId}`,
+                    method: 'DELETE'
                 };
             case 'delete-post':
                 return {
@@ -21,7 +22,8 @@ const AdminModal = ({ type, itemId }) => {
                     description: 'Are you sure you want to delete this post? This action cannot be undone.',
                     actionText: 'Delete Post',
                     actionClass: 'bg-red-600 hover:bg-red-700',
-                    endpoint: `/admin/posts/${itemId}`
+                    endpoint: `/admin/posts/${itemId}`,
+                    method: 'DELETE'
                 };
             case 'delete-comment':
                 return {
@@ -29,7 +31,17 @@ const AdminModal = ({ type, itemId }) => {
                     description: 'Are you sure you want to delete this comment? This action cannot be undone.',
                     actionText: 'Delete Comment',
                     actionClass: 'bg-red-600 hover:bg-red-700',
-                    endpoint: `/admin/comments/${itemId}`
+                    endpoint: `/admin/comments/${itemId}`,
+                    method: 'DELETE'
+                };
+            case 'logout':
+                return {
+                    title: 'Confirm Logout',
+                    description: 'Are you sure you want to logout? You will need to login again to access the admin dashboard.',
+                    actionText: 'Logout',
+                    actionClass: 'bg-orange-600 hover:bg-orange-700',
+                    endpoint: '/logout',
+                    method: 'POST'
                 };
             default:
                 return {
@@ -37,7 +49,8 @@ const AdminModal = ({ type, itemId }) => {
                     description: 'Are you sure you want to perform this action?',
                     actionText: 'Confirm',
                     actionClass: 'bg-blue-600 hover:bg-blue-700',
-                    endpoint: '#'
+                    endpoint: '#',
+                    method: 'POST'
                 };
         }
     };
@@ -62,12 +75,14 @@ const AdminModal = ({ type, itemId }) => {
                 form.appendChild(csrfInput);
             }
             
-            // Add method spoofing for DELETE
-            const methodInput = document.createElement('input');
-            methodInput.type = 'hidden';
-            methodInput.name = '_method';
-            methodInput.value = 'DELETE';
-            form.appendChild(methodInput);
+            // Add method spoofing if needed
+            if (config.method !== 'POST') {
+                const methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = config.method;
+                form.appendChild(methodInput);
+            }
             
             document.body.appendChild(form);
             form.submit();
@@ -80,12 +95,27 @@ const AdminModal = ({ type, itemId }) => {
         }
     };
 
+    const getTriggerButton = () => {
+        if (type === 'logout') {
+            return (
+                <button className="w-full flex items-center gap-3 px-4 py-3 text-slate-300 bg-gray-700 hover:bg-orange-600 hover:text-white rounded-lg transition-colors">
+                    <span className="text-lg">🚪</span>
+                    Logout
+                </button>
+            );
+        }
+        
+        return (
+            <button className="bg-red-500 text-white px-3 py-1 text-sm rounded hover:bg-red-600 transition-colors">
+                Delete
+            </button>
+        );
+    };
+
     return (
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
             <Dialog.Trigger asChild>
-                <button className="bg-red-500 text-white px-3 py-1 text-sm rounded hover:bg-red-600 transition-colors">
-                    Delete
-                </button>
+                {getTriggerButton()}
             </Dialog.Trigger>
             
             <Dialog.Portal>

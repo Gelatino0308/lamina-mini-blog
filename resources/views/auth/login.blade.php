@@ -1,7 +1,6 @@
 <x-layout title="Login">
-    <h1 class="title">Welcome back</h1>
-
-    <div class="mx-auto max-w-screen-sm card bg-orange-300">
+    <div class="mx-auto max-w-screen-sm card bg-orange-300 w-full">
+        <h1 class="title text-orange-700">Login to your account</h1>
         <form action="{{ route('login') }}" method="post">
             @csrf
 

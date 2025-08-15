@@ -1,7 +1,6 @@
 <x-layout title="Register">
-    <h1 class="title">Register a new account</h1>
-
-    <div class="mx-auto max-w-screen-sm card bg-orange-300">
+    <div class="mx-auto max-w-screen-sm card bg-orange-300 w-full">
+        <h1 class="title text-orange-700">Register a new account</h1>
         <form action="{{ route('register') }}" method="post">
             @csrf
             

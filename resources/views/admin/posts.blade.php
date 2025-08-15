@@ -21,7 +21,7 @@
                         <th class="px-6 py-3">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-orange-100 divide-y divide-gray-300">
                     @forelse($posts as $post)
                         <tr class="hover:bg-orange-50">
                             <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $post->id }}</td>

@@ -7,7 +7,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="text-white bg-gradient-to-r from from-black to-orange-500">
+<body class="text-white bg-gradient-to-b from-black to-orange-500 min-h-screen flex flex-col">
     <header class="bg-black shadow-lg">
         <nav class="h-20 w-full px-4 grid grid-cols-3 items-center max-w-screen-lg mx-auto">
             {{-- Left section --}}
@@ -59,7 +59,7 @@
         </nav>
     </header>
 
-    <main class="py-8 px-4 mx-auto max-w-screen-lg relative">
+    <main class="py-8 px-4 mx-auto max-w-screen-lg relative w-full flex-1 flex flex-col justify-center">
         @if(request()->routeIs('posts.index'))
             {{-- Hero Banner Section --}}
             <section class="relative w-full h-32 md:h-60 overflow-hidden rounded-xl mb-8 shadow-xl">

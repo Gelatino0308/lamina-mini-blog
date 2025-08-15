@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'posts');
 
-// Admin Routes MUST come BEFORE resource routes to avoid conflicts
+// Admin Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () { 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard'); 
     Route::get('/users', [AdminController::class, 'users'])->name('users'); 
@@ -22,7 +22,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/posts/store', [PostController::class, 'store'])->name('posts.store');
     Route::put('/posts/{post}/update', [PostController::class, 'update'])->name('posts.update');
 
-    // AJAX routes for updates
+    // Update routes
     Route::put('/users/{user}/role', [AdminController::class, 'updateUserRole'])->name('users.update-role');
     Route::put('/posts/{post}/category', [AdminController::class, 'updatePostCategory'])->name('posts.update-category');
 
@@ -36,6 +36,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 Route::resource('posts', PostController::class);
 Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
 
+//Authenticated user routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -49,7 +49,7 @@ WeebYaps is a vibrant blogging platform designed specifically for anime and mang
 - MySQL 8.0 or higher
 - Git
 
-### Installation=
+### Installation
 
 1. **Clone the repository**
    ```bash

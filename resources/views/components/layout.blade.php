@@ -66,7 +66,7 @@
     >
         @if(request()->routeIs('posts.index'))
             {{-- Hero Banner Section --}}
-            <section class="relative w-full h-32 md:h-60 overflow-hidden rounded-xl mb-8 shadow-xl">
+            <section class="relative w-full h-32 md:h-60 overflow-hidden rounded-xl mb-8 shadow-[0_0_15px] shadow-orange-500">
                 <img src="{{ asset('storage/images/anime-bg.jpg') }}" 
                     alt="WeebYaps Banner" 
                     class="w-full h-full object-cover object-center">

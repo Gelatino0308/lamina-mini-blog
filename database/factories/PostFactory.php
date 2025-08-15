@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -51,11 +52,11 @@ class PostFactory extends Factory
         ];
     
         return [
-            'user_id' => 1,
+            'user_id' => User::all()->random()->id,
             'title' => fake()->randomElement(array_merge($animeTitles, $mangaTitles)),
             'category' => fake()->randomElement(array_keys(Post::getCategories())),
             'body' => fake()->randomElement(array_merge($animeArticleBodies, $mangaArticleBodies)),
-            'image' => 'posts_images/default.jpg',
+            'image' => 'posts_images/default.png',
             'likes' => fake()->numberBetween(0, 50)
         ];
     }

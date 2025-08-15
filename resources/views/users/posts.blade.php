@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Author's Posts">
     <h1 class="title">{{ $user->username }}'s Posts &#9830; {{ $posts->total() }} {{ \App\Models\Post::getCategories()[$selectedCategory] ?? 'Total' }} Post</h1>
 
     {{-- Filter dropdown --}}

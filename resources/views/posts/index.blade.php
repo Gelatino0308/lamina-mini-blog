@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Home">
     
     <h1 class="title">Latest Posts</h1>
 

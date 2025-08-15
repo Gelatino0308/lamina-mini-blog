@@ -78,7 +78,7 @@ class PostController extends Controller implements HasMiddleware
         ]);
 
         // Redirect to dashboard
-        return back()->with('success', 'Your post was created');
+        return back()->with('success', 'The post was created successfully!');
     }
 
     /**
@@ -121,7 +121,7 @@ class PostController extends Controller implements HasMiddleware
         // Store image if exists
         $path = $post->image ?? null;
         if ($request->hasFile('image')) {
-            if ($post->image && $post->image != 'posts_images/default.jpg') {
+            if ($post->image && $post->image != 'posts_images/default.png') {
                 Storage::disk('public')->delete($post->image);
             }
             $path = Storage::disk('public')->put('posts_images', $request->image);
@@ -135,8 +135,11 @@ class PostController extends Controller implements HasMiddleware
             'image' => $path
         ]);
 
-        // Redirect to dashboard
-        return redirect()->route('dashboard')->with('success', 'Your post was updated');
+        // Redirect to corresponding page
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.posts')->with('success', 'The post was updated successfully!');
+        }
+        return redirect()->route('dashboard')->with('success', 'Your post was updated successfully!');
     }
 
     /**
@@ -148,20 +151,19 @@ class PostController extends Controller implements HasMiddleware
         Gate::authorize('modify', $post);
 
         // Delete post image if it exists
-        if ($post->image) {
+        if ($post->image && $post->image !== 'posts_images/default.png') {
             Storage::disk('public')->delete($post->image);
         }
 
         // Delete the post
         $post->delete();
 
-        // Redirect back to dashboard
-        return back()->with('delete', 'Your post was deleted!');
+        // Redirect to previous page
+        return back()->with('delete', 'The post was deleted!');
     }
 
     
     // Toggle like for a post (authenticated users only)
-     
     public function toggleLike(Post $post)
     {
         $user = Auth::user();
@@ -198,7 +200,7 @@ class PostController extends Controller implements HasMiddleware
             'comment' => $request->comment
         ]);
 
-        // Redirect to dashboard
-        return back()->with('success', 'Your comment was created');
+        // Redirect to previous page
+        return back()->with('success', 'Your comment was created!');
     }
 }

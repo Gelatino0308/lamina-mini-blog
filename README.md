@@ -3,6 +3,8 @@
 WeebYaps is a vibrant blogging platform designed specifically for anime and manga enthusiasts. It's a community-driven space where otaku culture thrives, allowing users to share their thoughts, reviews, theories, and discussions about their favorite anime series, manga chapters, and Japanese pop culture trends.
 
 ## Features
+
+### Blogger Interface
 - User authentication
 - Commenting system
 - Like functionality for posts
@@ -11,6 +13,12 @@ WeebYaps is a vibrant blogging platform designed specifically for anime and mang
 - Filter system by genre based on target audience
 - Trending posts and popular discussions
 - Tag system for easy content categorization
+
+### Admin Interface
+- Admin Dashboard
+- Dynamic Role Management
+- Post Management and CRUD
+- Comment Management
 
 ## Technologies Used
 
@@ -21,9 +29,11 @@ WeebYaps is a vibrant blogging platform designed specifically for anime and mang
 
 ### Frontend
 - **Blade Templates** 
-- **JavaScript (ES6+)** 
+- **JavaScript (ES6+)**
+- **React** 
 - **Alpine.js** 
-- **Tailwind CSS** 
+- **Tailwind CSS**
+- **Radix UI** 
 
 ### Development Environment
 - **Composer** 
@@ -39,7 +49,7 @@ WeebYaps is a vibrant blogging platform designed specifically for anime and mang
 - MySQL 8.0 or higher
 - Git
 
-### Installation
+### Installation=
 
 1. **Clone the repository**
    ```bash
@@ -89,7 +99,7 @@ WeebYaps is a vibrant blogging platform designed specifically for anime and mang
 
 8. **Run database migrations**
    ```bash
-   php artisan migrate
+   php artisan migrate:fresh
    ```
 
 9. **Seed the database (optional)**
@@ -104,7 +114,7 @@ WeebYaps is a vibrant blogging platform designed specifically for anime and mang
 
 11. **Compile frontend assets**
     ```bash
-    npm run dev
+    npm run build
     ```
 
 12. **Start the development server**
@@ -114,3 +124,10 @@ WeebYaps is a vibrant blogging platform designed specifically for anime and mang
 
 13. **Access the application**
     - Open your browser and visit `http://localhost:8000`
+
+
+### Testing Admin Interface
+
+1. Create your admin account in registration page then immediately logout.
+2. Change the role of that account to admin in the role column of the users table in the database via database management tool like phpMyAdmin in XAMPP.
+3. Login that account again to see the admin dashboard.

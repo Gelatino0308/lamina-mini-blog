@@ -151,7 +151,7 @@ class PostController extends Controller implements HasMiddleware
         Gate::authorize('modify', $post);
 
         // Delete post image if it exists
-        if ($post->image) {
+        if ($post->image && $post->image !== 'posts_images/default.png') {
             Storage::disk('public')->delete($post->image);
         }
 
